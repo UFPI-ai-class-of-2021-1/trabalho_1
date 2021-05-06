@@ -1,11 +1,6 @@
 let State = require('./state.js')
 
-const MOVE = {
-	UP: "UP",
-	RIGHT: "RIGHT",
-	DOWN: "DOWN",
-	LEFT: "LEFT"
-}
+const FINAL_STATE = new State([[1,2,3],[4,5,6],[7,8,0]])
 
 function makeMove(state, move){
   let x = state.posZero.x
@@ -47,7 +42,4 @@ function sendResponse(executionTime, memoryUsage, generatedNodes, solutionDepth,
   console.log(JSON.stringify(response))
 }
 
-module.exports = { sendResponse, MOVE, makeMove }
-
-// console.log(checkMoveValidity([[8,2,3],[4,7,5],[0,1,6]], MOVE.RIGHT))
-// console.log(new State([[8,2,3],[4,7,5],[0,1,6]]).hash )
+module.exports = { sendResponse, makeMove, FINAL_STATE }

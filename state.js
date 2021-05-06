@@ -1,13 +1,6 @@
-// let MOVE = require('./common.js').MOVE
-const MOVE = {
-	UP: "UP",
-	RIGHT: "RIGHT",
-	DOWN: "DOWN",
-	LEFT: "LEFT"
-}
+const MOVE = require('./move.js')
 
 module.exports = class State{
-
   constructor(matrix) { 
     this.matrix = matrix
     this.hash = this.getHash()

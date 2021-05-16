@@ -1,11 +1,25 @@
+let node = 0
+
 $(document).ready(function(){
-  
- renderPuzzle(iniatilizePuzzle([1,2,3,4,5,6,7,8,0]))
 
 })
 
-function renderPuzzle(array){
-  const rootElement = $("#root")
+function textToState(text){
+  let array = text.split(',')
+  return new State(textArrayToIntMatrix(array))
+}
+
+function renderState(state){
+  const rootElement = $("#body")
+
+  rootElement.append("<div id='container'><ul id='root"+node+"'></ul></div>")
+
+  renderPuzzle(state.matrix.flat(1), node)
+  node++
+}
+
+function renderPuzzle(array, rootId){
+  const rootElement = $("#root"+rootId)
 
   array.forEach((element)=> {
     let childElement = ``

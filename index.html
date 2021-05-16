@@ -5,21 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
     <title>Sliding Tile Puzzle</title>
   </head>
 
-  <body>
+  <body id="body">
     <h1>Jogo dos 8</h1>
-    <div id="container">
-      <ul id="root">
-      </ul>
+    <div>
+      <form action="">
+        <label for="fname">Input*:</label>
+        <input type="text" id="fname" name="fname"><br><br>
+        <label for="limit">Limit:</label>
+        <input type="text" id="limit" name="limit"><br><br>
+        <button type="button" onclick="depthBlindSearch(textToState(document.getElementById('fname').value), parseInt(document.getElementById('limit').value))">
+          Busca em Profundidade
+        </button>
+        <button type="button" onclick="">
+          Busca em Largura
+        </button>
+        <button type="button" onclick="">
+          Busca Gulosa
+        </button>
+        <button type="button" onclick="">
+          Busca A*
+        </button>
+      </form>
     </div>
 
   </body>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="/scripts/index.js"></script>
+  <script src="scripts/move.js"></script>
+  <script src="scripts/state.js"></script>
+  <script src="scripts/common.js"></script>
+  <script src="scripts/depth_blind_search.js"></script>
+  <script src="scripts/index.js"></script>
 </html>

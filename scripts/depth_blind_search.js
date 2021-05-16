@@ -1,15 +1,18 @@
-const common = require('./common.js')
-const FINAL_STATE = common.FINAL_STATE
-const MOVE = require('./move.js')
-let State = require('./state.js')
+// const common = require('./common.js')
+// const FINAL_STATE = common.FINAL_STATE
+// const MOVE = require('./move.js')
+// let State = require('./state.js')
 
-function DepthBlindSearch(initialState, limitDepth){
+function depthBlindSearch(initialState, limitDepth){
   if(!(initialState instanceof State)) initialState = new State(initialState)
+  
+  renderState(initialState)
+
   let depthNodes = [initialState]
   let controller = initController(limitDepth)
 
   if(initialState.isSameAs(FINAL_STATE)){
-    common.sendResponse(controller. executionTime, controller.maxMemoryUsage, depthNodes, 
+    sendResponse(controller. executionTime, controller.maxMemoryUsage, depthNodes, 
       controller.currentDepth, controller.maxDepth)
     return
   }
@@ -17,7 +20,7 @@ function DepthBlindSearch(initialState, limitDepth){
   enterDepth(depthNodes)
 
   if(depthNodes[depthNodes.length-1].isSameAs(FINAL_STATE)){
-    common.sendResponse(controller.executionTime, controller.maxMemoryUsage, depthNodes, 
+    sendResponse(controller.executionTime, controller.maxMemoryUsage, depthNodes, 
       controller.currentDepth, controller.maxDepth)
   } else {
     throw new Error('Solution not found')
@@ -66,8 +69,10 @@ function enterDepth(depthNodes){
 
 function openNode(state, move, depthNodes){
   if(!state.isMoveAvailable(move)) return
-  newState = common.makeMove(state, move)
+  newState = makeMove(state, move)
   if(!checkStateNotInLoop(newState, depthNodes)) return
+
+  renderState(newState)
 
   depthNodes.push(newState)
   controller.enterDepth()

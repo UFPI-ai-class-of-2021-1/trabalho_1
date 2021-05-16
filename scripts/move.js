@@ -1,4 +1,4 @@
-module.exports = MOVE = {
+const MOVE = {
 	UP: "UP",
 	RIGHT: "RIGHT",
 	DOWN: "DOWN",

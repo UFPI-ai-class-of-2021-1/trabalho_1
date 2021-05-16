@@ -1,4 +1,4 @@
-let State = require('./state.js')
+// let State = require('./state.js')
 
 const FINAL_STATE = new State([[1,2,3],[4,5,6],[7,8,0]])
 
@@ -42,4 +42,10 @@ function sendResponse(executionTime, memoryUsage, generatedNodes, solutionDepth,
   console.log(JSON.stringify(response))
 }
 
-module.exports = { sendResponse, makeMove, FINAL_STATE }
+function textArrayToIntMatrix(array){
+  return array.reduce(function (rows, key, index) { 
+    return (index % 3 == 0 ? rows.push([parseInt(key)]) : rows[rows.length-1].push(parseInt(key))) && rows;
+  }, []);
+}
+
+// module.exports = { sendResponse, makeMove, FINAL_STATE }

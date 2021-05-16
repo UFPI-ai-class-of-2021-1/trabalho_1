@@ -1,6 +1,6 @@
-const MOVE = require('./move.js')
+// const MOVE = require('./move.js')
 
-module.exports = class State{
+class State{
   constructor(matrix) { 
     this.matrix = matrix
     this.hash = this.getHash()

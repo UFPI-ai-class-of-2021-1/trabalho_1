@@ -13,7 +13,7 @@ function greedySearch(initialState){
   let controller = initControllerGreedy()
 
   if(initialState.isSameAs(FINAL_STATE)){
-    sendResponse(controller. executionTime, controller.maxMemoryUsage, depthNodes, 
+    sendResponse(controller. executionTime, controller.maxMemoryUsage, nodeSpace, 
       controller.currentDepth, controller.maxDepth)
     return
   }
@@ -49,10 +49,10 @@ function initControllerGreedy() {
   }
 }
 
-function checkFinalGreedy(node){
+function checkFinalGreedy(greedyNode){
   controller.executionTime++
-  renderState(node)
-  if(node.isSameAs(FINAL_STATE)){
+  renderState(greedyNode)
+  if(greedyNode.isSameAs(FINAL_STATE)){
     controller.done = true
     return
   }

@@ -13,7 +13,7 @@ function widthBlindSearch(initialState, limit){
   let controller = initControllerWBS()
 
   if(initialState.isSameAs(FINAL_STATE)){
-    sendResponse(controller. executionTime, controller.maxMemoryUsage, depthNodes, 
+    sendResponse(controller. executionTime, controller.maxMemoryUsage, nodeSpace, 
       controller.currentDepth, controller.maxDepth)
     return
   }

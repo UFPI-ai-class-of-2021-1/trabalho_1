@@ -35,4 +35,15 @@ class State{
   
     return (x >= 0 && x <= 2 && y >= 0 && y <= 2)
   }
+
+  fitness(){
+    let fit = 0 
+    this.matrix.forEach((row, i) => {
+      row.forEach((item, j) =>{
+        let coords = finalCoords(item)
+        fit += Math.abs(coords[0] - j) + Math.abs(coords[1] - i)
+      })
+    });
+    return fit
+  }
 }

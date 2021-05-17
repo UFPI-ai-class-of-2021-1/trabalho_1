@@ -1,6 +1,19 @@
 // let State = require('./state.js')
 
 const FINAL_STATE = new State([[1,2,3],[4,5,6],[7,8,0]])
+function finalCoords(value){
+  switch (value) {
+    case 1: return [0,0]
+    case 2: return [1,0]
+    case 3: return [2,0]
+    case 4: return [0,1]
+    case 5: return [1,1]
+    case 6: return [2,1]
+    case 7: return [0,2]
+    case 8: return [1,2]
+    case 0: return [2,2]
+  }
+}
 
 function makeMove(state, move){
   let x = state.posZero.x

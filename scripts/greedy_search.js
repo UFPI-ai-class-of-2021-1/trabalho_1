@@ -10,7 +10,7 @@ function greedySearch(initialState){
 
   let history = []
   let nodeSpace = [initialState]
-  let controller = initController()
+  let controller = initControllerGreedy()
 
   if(initialState.isSameAs(FINAL_STATE)){
     sendResponse(controller. executionTime, controller.maxMemoryUsage, depthNodes, 
@@ -20,16 +20,16 @@ function greedySearch(initialState){
   
   do{
     history = history.concat(nodeSpace)
-    nodeSpace = openDepth(nodeSpace, history)
-    choice = chooseBest(nodeSpace)
-    checkFinal(choice)
+    nodeSpace = openDepthGreedy(nodeSpace, history)
+    choice = chooseBestGreedy(nodeSpace)
+    checkFinalGreedy(choice)
   }while(controller.done === false)
 
   sendResponse(controller.executionTime, controller.maxMemoryUsage, history, 
     controller.currentDepth, controller.maxDepth)
 }
 
-function initController() {
+function initControllerGreedy() {
   return controller = {
     done: false,
     executionTime: 1,
@@ -49,7 +49,7 @@ function initController() {
   }
 }
 
-function checkFinal(node){
+function checkFinalGreedy(node){
   controller.executionTime++
   renderState(node)
   if(node.isSameAs(FINAL_STATE)){
@@ -58,30 +58,26 @@ function checkFinal(node){
   }
 }
 
-function openDepth(space, history){
+function openDepthGreedy(space, history){
   let newSpace = []
   let directions = [MOVE.UP, MOVE.RIGHT, MOVE.DOWN, MOVE.LEFT]
   space.forEach(state => {
     directions.forEach(dir => {
-      if(controller.done === false) openNode(state, dir, newSpace, history)
+      if(controller.done === false) openNodeGreedy(state, dir, newSpace, history)
     })
   })
   controller.update(newSpace.length)
   return newSpace
 }
 
-function openNode(state, move, space, history){
+function openNodeGreedy(state, move, space, history){
   if(!state.isMoveAvailable(move)) return
   newState = makeMove(state, move)
   if(!checkStateNotInLoop(newState, history)) return
   space.push(newState)
 }
 
-function checkStateNotInLoop(state, stateHistory){
-  return stateHistory.every(element => element.hash !== state.hash)
-}
-
-function chooseBest(space){
+function chooseBestGreedy(space){
   let fitArray = space.map(state => state.fitness() )
   let chosenIndex = fitArray.indexOf(Math.min.apply(Math, fitArray))
   return space[chosenIndex]

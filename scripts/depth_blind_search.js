@@ -9,7 +9,7 @@ function depthBlindSearch(initialState, limitDepth){
   renderState(initialState)
 
   let depthNodes = [initialState]
-  let controller = initController(limitDepth)
+  let controller = initControllerDBS(limitDepth)
 
   if(initialState.isSameAs(FINAL_STATE)){
     sendResponse(controller. executionTime, controller.maxMemoryUsage, depthNodes, 
@@ -17,7 +17,7 @@ function depthBlindSearch(initialState, limitDepth){
     return
   }
   
-  enterDepth(depthNodes)
+  enterDepthDBS(depthNodes)
 
   if(depthNodes[depthNodes.length-1].isSameAs(FINAL_STATE)){
     sendResponse(controller.executionTime, controller.maxMemoryUsage, depthNodes, 
@@ -28,7 +28,7 @@ function depthBlindSearch(initialState, limitDepth){
   
 }
 
-function initController(limitDepth) {
+function initControllerDBS(limitDepth) {
   return controller = {
     done: false,
     limitDepth: limitDepth,
@@ -56,18 +56,18 @@ function initController(limitDepth) {
   }
 }
 
-function enterDepth(depthNodes){
+function enterDepthDBS(depthNodes){
   let state = depthNodes[depthNodes.length-1]
 
   //RANDOM DIRECTIONS
   let directions = [MOVE.UP, MOVE.RIGHT, MOVE.DOWN, MOVE.LEFT]
   directions = directions.sort(() => (Math.random() > .5) ? 1 : -1)
   directions.forEach(dir => {
-    if(controller.done === false) openNode(state, dir, depthNodes)
+    if(controller.done === false) openNodeDBS(state, dir, depthNodes)
   })
 }
 
-function openNode(state, move, depthNodes){
+function openNodeDBS(state, move, depthNodes){
   if(!state.isMoveAvailable(move)) return
   newState = makeMove(state, move)
   if(!checkStateNotInLoop(newState, depthNodes)) return
@@ -81,16 +81,9 @@ function openNode(state, move, depthNodes){
     return
   }
 
-  if(controller.currentDepth < controller.limitDepth) enterDepth(depthNodes)
+  if(controller.currentDepth < controller.limitDepth) enterDepthDBS(depthNodes)
 
   if(controller.done === true) return
   controller.leaveDepth()
   depthNodes.pop(newState)
 }
-
-function checkStateNotInLoop(state, stateHistory){
-  return stateHistory.every(element => element.hash !== state.hash)
-}
-
-// execute
-// DepthBlindSearch([[1,2,3],[4,0,6],[7,5,8]], 10)

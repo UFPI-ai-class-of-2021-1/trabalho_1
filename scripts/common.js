@@ -61,4 +61,8 @@ function textArrayToIntMatrix(array){
   }, []);
 }
 
+function checkStateNotInLoop(state, stateHistory){
+  return stateHistory.every(element => element.hash !== state.hash)
+}
+
 // module.exports = { sendResponse, makeMove, FINAL_STATE }

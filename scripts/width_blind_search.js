@@ -26,7 +26,7 @@ function widthBlindSearch(initialState, limit){
   }while(controller.done === false)
   
   history = history.concat(nodeSpace)
-  sendResponse(controller.executionTime, history.length, history, 
+  sendResponse(controller.executionTime, controller.maxMemoryUsage, history.length, 
     controller.currentDepth, controller.currentDepth)
 }
 
@@ -34,7 +34,15 @@ function initControllerWBS() {
   return controller = {
     done: false,
     executionTime: 1,
-    currentDepth: 1
+    currentMemoryUsage: 1,
+    maxMemoryUsage: 1,
+    currentDepth: 1,
+    maxDepth: 1,
+
+    update(spaceSize){
+      this.currentMemoryUsage = spaceSize
+      if(this.currentMemoryUsage > this.maxMemoryUsage) this.maxMemoryUsage = this.currentMemoryUsage
+    },
   }
 }
 
@@ -58,6 +66,7 @@ function openDepthWBS(space, history){
     })
   })
   controller.currentDepth++
+  controller.update(newSpace.length)
   return newSpace
 }
 

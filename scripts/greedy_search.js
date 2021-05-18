@@ -26,7 +26,7 @@ function greedySearch(initialState){
     checkFinalGreedy(choice)
   }while(controller.done === false)
   
-  sendResponse(controller.executionTime, history.length, history, 
+  sendResponse(controller.executionTime, controller.maxMemoryUsage, history, 
     controller.currentDepth, controller.maxDepth)
 }
 

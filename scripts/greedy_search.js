@@ -13,19 +13,20 @@ function greedySearch(initialState){
   let controller = initControllerGreedy()
 
   if(initialState.isSameAs(FINAL_STATE)){
-    sendResponse(controller. executionTime, controller.maxMemoryUsage, nodeSpace, 
+    sendResponse(controller. executionTime, nodeSpace.length, nodeSpace, 
       controller.currentDepth, controller.maxDepth)
     return
   }
   
+  choice = nodeSpace[0]
   do{
+    nodeSpace = openDepthGreedy(choice, history)
     history = history.concat(nodeSpace)
-    nodeSpace = openDepthGreedy(nodeSpace, history)
     choice = chooseBestGreedy(nodeSpace)
     checkFinalGreedy(choice)
   }while(controller.done === false)
-
-  sendResponse(controller.executionTime, controller.maxMemoryUsage, history, 
+  
+  sendResponse(controller.executionTime, history.length, history, 
     controller.currentDepth, controller.maxDepth)
 }
 
@@ -58,13 +59,11 @@ function checkFinalGreedy(greedyNode){
   }
 }
 
-function openDepthGreedy(space, history){
+function openDepthGreedy(state, history){
   let newSpace = []
   let directions = [MOVE.UP, MOVE.RIGHT, MOVE.DOWN, MOVE.LEFT]
-  space.forEach(state => {
-    directions.forEach(dir => {
-      if(controller.done === false) openNodeGreedy(state, dir, newSpace, history)
-    })
+  directions.forEach(dir => {
+    if(controller.done === false) openNodeGreedy(state, dir, newSpace, history)
   })
   controller.update(newSpace.length)
   return newSpace

@@ -26,8 +26,8 @@ function aStarSearch(initialState){
   }
   
   do{
-    history = history.concat(nodeSpace)
     newSpace = openDepthAStar(nodeSpace[0], history)
+    history = history.concat(nodeSpace)
     nodeSpace.shift()
     nodeSpace = nodeSpace.concat(newSpace)
     nodeSpace.sort((struct1, struct2) => {

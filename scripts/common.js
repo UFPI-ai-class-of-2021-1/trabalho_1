@@ -53,6 +53,12 @@ function sendResponse(executionTime, memoryUsage, generatedNodes, solutionDepth,
   }
   // front(response)
   console.log(JSON.stringify(response))
+
+  const rootElement = $("#body")
+  rootElement.append("<div>Tempo de execução: "+executionTime+"</div><br>")
+  rootElement.append("<div>Utilização de memória: "+memoryUsage+"</div><br>")
+  rootElement.append("<div>Profundidade da Solução: "+solutionDepth+"</div><br>")
+  rootElement.append("<div>Profundidade Máxima: "+maxDepth+"</div><br>")
 }
 
 function textArrayToIntMatrix(array){
